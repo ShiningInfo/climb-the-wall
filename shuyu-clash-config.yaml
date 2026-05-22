@@ -1,5 +1,5 @@
 # profile-name: shuyu-clash-config
-# 订阅链接（国内可访问转发）：https://cdn.jsdelivr.net/gh/https://github.com/ShiningInfo/climb-the-wall@main/shuyu-clash-config.yaml
+# 订阅链接（国内可访问转发）：https://cdn.jsdelivr.net/gh/ShiningInfo/climb-the-wall@main/shuyu-clash-config.yaml
 port: 7890
 socks-port: 7891
 allow-lan: true
