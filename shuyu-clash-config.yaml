@@ -10,17 +10,11 @@ external-controller: '127.0.0.1:9090'
 
 # 1. 订阅资源
 proxy-providers:
-  sub99:
-    type: http
-    url: "https://sub1.smallstrawberry.com/api/v1/client/subscribe?token=17b48131c9c64971810d599630d092b6"
-    interval: 3600
-    path: ./sub99.yaml
-    health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
-  flybit:
+  CuteCloud:
     type: http
     url: "https://sublink.cute-cloud.de/link?token=9853b4d94c514fcd95f7cca467140aa6"
     interval: 3600
-    path: ./flybit.yaml
+    path: ./sub1.yaml
     health-check: {enable: true, interval: 600, url: "http://www.gstatic.com/generate_204"}
 
 # 2. 策略组
@@ -31,7 +25,6 @@ proxy-groups:
     proxies:
       - ⚡ 全局自动
       - 📦 99 订阅
-      - 📦 CuteCloud 订阅
       - 🇭🇰 香港地区
       - 🇯🇵 日本地区
       - 🇺🇸 美国地区
@@ -42,9 +35,8 @@ proxy-groups:
 
   - name: ⚡ 全局自动
     type: url-test
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
@@ -55,29 +47,13 @@ proxy-groups:
     proxies:
       - ⚡ 99 自动
     use:
-      - sub99
+      - CuteCloud
 
   - name: ⚡ 99 自动
     type: url-test
     hidden: true
     use:
-      - sub99
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-
-  - name: 📦 CuteCloud 订阅
-    type: select
-    proxies:
-      - ⚡ CuteCloud 自动
-    use:
-      - flybit
-
-  - name: ⚡ CuteCloud 自动
-    type: url-test
-    hidden: true
-    use:
-      - flybit
+      - CuteCloud
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
@@ -88,17 +64,15 @@ proxy-groups:
     proxies: 
       - 🇭🇰 香港-自动测速
       - DIRECT
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
 
   - name: 🇭🇰 香港-自动测速
     type: url-test
     hidden: true
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     filter: '(?i)(香港|\bHK\b|HKG|Hong[ -]?Kong|HKBN|HKT)'
     url: https://www.netflix.com/hk-en/
     interval: 300
@@ -108,17 +82,15 @@ proxy-groups:
     proxies: 
       - 🇯🇵 日本-自动测速
       - DIRECT
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
 
   - name: 🇯🇵 日本-自动测速
     type: url-test
     hidden: true
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     filter: '(?i)(日本|\bJP\b|JPN|Japan|Tokyo|Osaka|东京|大阪)'
     url: https://www.netflix.com/jp-en/
     interval: 300
@@ -128,17 +100,15 @@ proxy-groups:
     proxies: 
       - 🇺🇸 美国-自动测速
       - DIRECT
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
 
   - name: 🇺🇸 美国-自动测速
     type: url-test
     hidden: true
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     filter: '(?i)(美国|\bUS\b|USA|United States|America|New York|Los Angeles|San Jose|Seattle|Dallas|Chicago|Ashburn|Silicon Valley|Fremont|Phoenix)'
     url: https://www.netflix.com/
     interval: 300
@@ -148,17 +118,15 @@ proxy-groups:
     proxies: 
       - 🇸🇬 新加坡-自动测速
       - DIRECT
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
 
   - name: 🇸🇬 新加坡-自动测速
     type: url-test
     hidden: true
-    use: 
-      - sub99
-      - flybit
+    use:
+      - CuteCloud
     filter: '(?i)(新加坡|\bSG\b|SGP|Singapore|SIN|狮城)'
     url: https://www.netflix.com/sg/
     interval: 300
@@ -169,16 +137,14 @@ proxy-groups:
       - 🇹🇼 台湾-自动测速
       - DIRECT
     use:
-      - sub99
-      - flybit
+      - CuteCloud
     filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
 
   - name: 🇹🇼 台湾-自动测速
     type: url-test
     hidden: true
     use:
-      - sub99
-      - flybit
+      - CuteCloud
     filter: '(?i)(台湾|台灣|\bTW\b|TWN|Taiwan|Taipei|台北|新北|Taichung)'
     url: https://www.netflix.com/tw/
     interval: 300
@@ -189,16 +155,14 @@ proxy-groups:
       - 🇰🇷 韩国-自动测速
       - DIRECT
     use:
-      - sub99
-      - flybit
+      - CuteCloud
     filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
 
   - name: 🇰🇷 韩国-自动测速
     type: url-test
     hidden: true
     use:
-      - sub99
-      - flybit
+      - CuteCloud
     filter: '(?i)(韩国|韓國|\bKR\b|KOR|Korea|Seoul|首尔|首爾|Busan|釜山)'
     url: https://www.netflix.com/kr/
     interval: 300
